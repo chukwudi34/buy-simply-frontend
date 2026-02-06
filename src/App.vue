@@ -1,11 +1,14 @@
-<script setup></script>
-
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <LoginView />
 </template>
 
-<style scoped></style>
+<script setup>
+import LoginView from './views/LoginView.vue';
+</script>
+
+<style>
+#app {
+  width: 100%;
+  min-height: 100vh;
+}
+</style>
