@@ -4,20 +4,26 @@
     <div class="branding-section">
       <div class="content-wrapper">
         <header class="logo-header">
-          <img src="/asset/images/logo.png" alt="Team Achieve Logo" class="logo" />
+          <img
+            src="/asset/images/logo.png"
+            alt="Team Achieve Logo"
+            class="logo"
+          />
         </header>
 
         <div class="image-container">
-          <img 
-            src="/asset/images/dance_demostrate.png" 
-            alt="Smiling couple outdoors" 
+          <img
+            src="/asset/images/dance_demostrate.png"
+            alt="Smiling couple outdoors"
             class="main-image"
           />
         </div>
 
         <div class="branding-footer">
           <h2 class="branding-title">Team Achieve</h2>
-          <p class="branding-subtitle">Your perfect solution for funding your desires</p>
+          <p class="branding-subtitle">
+            Your perfect solution for funding your desires
+          </p>
         </div>
       </div>
     </div>
@@ -60,14 +66,12 @@
             <a href="#" class="forgot-password">Forgot Password?</a>
           </div>
 
-          <AppButton type="submit" :loading="isLoggingIn">
-            Sign in
-          </AppButton>
+          <AppButton type="submit" :loading="isLoggingIn"> Sign in </AppButton>
         </form>
 
         <div class="form-footer">
           <p>
-            Don't have an account? 
+            Don't have an account?
             <a href="#" class="signup-link">Sign up</a>
           </p>
         </div>
@@ -77,39 +81,39 @@
 </template>
 
 <script setup>
-import { ref } from 'vue';
-import AppInput from '../components/AppInput.vue';
-import AppButton from '../components/AppButton.vue';
+import { ref } from "vue";
+import AppInput from "../components/AppInput.vue";
+import AppButton from "../components/AppButton.vue";
 
-const email = ref('');
-const password = ref('');
+const email = ref("");
+const password = ref("");
 const rememberMe = ref(false);
 const isLoggingIn = ref(false);
 const errors = ref({
-  email: '',
-  password: ''
+  email: "",
+  password: "",
 });
 
 const validateForm = () => {
   let isValid = true;
-  errors.value = { email: '', password: '' };
+  errors.value = { email: "", password: "" };
 
   // Email validation
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
   if (!email.value) {
-    errors.value.email = 'Email address is required';
+    errors.value.email = "Email address is required";
     isValid = false;
   } else if (!emailRegex.test(email.value)) {
-    errors.value.email = 'Please enter a valid email address';
+    errors.value.email = "Please enter a valid email address";
     isValid = false;
   }
 
   // Password validation
   if (!password.value) {
-    errors.value.password = 'Password is required';
+    errors.value.password = "Password is required";
     isValid = false;
   } else if (password.value.length < 6) {
-    errors.value.password = 'Password must be at least 6 characters';
+    errors.value.password = "Password must be at least 6 characters";
     isValid = false;
   }
 
@@ -123,7 +127,7 @@ const handleSignIn = () => {
   // Simulate API call
   setTimeout(() => {
     isLoggingIn.value = false;
-    alert('Logged in successfully!');
+    alert("Logged in successfully!");
   }, 1500);
 };
 </script>
@@ -144,6 +148,8 @@ const handleSignIn = () => {
   justify-content: center;
   align-items: center;
   padding: 40px;
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
 }
 
 .content-wrapper {
@@ -328,7 +334,7 @@ const handleSignIn = () => {
   .branding-section {
     display: none; /* In many mobile views, branding is simplified or logo is moved to form section */
   }
-  
+
   /* Mobile approach: Add logo to form section */
   .form-header::before {
     content: "";
@@ -336,7 +342,7 @@ const handleSignIn = () => {
     height: 120px;
     width: 100%;
     margin: 0 auto 32px;
-    background-image: url('/asset/images/logo.png');
+    background-image: url("/asset/images/logo.png");
     background-repeat: no-repeat;
     background-position: center;
     background-size: contain;
