@@ -32,13 +32,14 @@
           </p>
         </div>
 
-        <form @submit.prevent="handleSignIn" class="login-form">
+        <form @submit.prevent="handleSignIn" class="login-form" novalidate>
           <AppInput
             v-model="email"
             label="Email Address"
             type="email"
             placeholder="Enter your email"
             required
+            :error="errors.email"
           />
 
           <AppInput
@@ -47,6 +48,7 @@
             type="password"
             placeholder="Enter your password"
             required
+            :error="errors.password"
           />
 
           <div class="form-options">
@@ -83,8 +85,40 @@ const email = ref('');
 const password = ref('');
 const rememberMe = ref(false);
 const isLoggingIn = ref(false);
+const errors = ref({
+  email: '',
+  password: ''
+});
+
+const validateForm = () => {
+  let isValid = true;
+  errors.value = { email: '', password: '' };
+
+  // Email validation
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  if (!email.value) {
+    errors.value.email = 'Email address is required';
+    isValid = false;
+  } else if (!emailRegex.test(email.value)) {
+    errors.value.email = 'Please enter a valid email address';
+    isValid = false;
+  }
+
+  // Password validation
+  if (!password.value) {
+    errors.value.password = 'Password is required';
+    isValid = false;
+  } else if (password.value.length < 6) {
+    errors.value.password = 'Password must be at least 6 characters';
+    isValid = false;
+  }
+
+  return isValid;
+};
 
 const handleSignIn = () => {
+  if (!validateForm()) return;
+
   isLoggingIn.value = true;
   // Simulate API call
   setTimeout(() => {
@@ -125,7 +159,8 @@ const handleSignIn = () => {
 }
 
 .logo {
-  height: 60px;
+  height: 180px;
+  width: auto;
   object-fit: contain;
 }
 
@@ -298,8 +333,8 @@ const handleSignIn = () => {
   .form-header::before {
     content: "";
     display: block;
-    height: 60px;
-    width: 200px;
+    height: 120px;
+    width: 100%;
     margin: 0 auto 32px;
     background-image: url('/asset/images/logo.png');
     background-repeat: no-repeat;
